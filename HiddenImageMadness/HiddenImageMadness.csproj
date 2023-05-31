@@ -51,11 +51,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="generated-thumbnail-of-rotated-image.jpg" />
     <Content Include="generated-thumbnail.jpg" />
-    <Content Include="Papio-hamadryas-head-rotated.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Papio-hamadryas-head.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

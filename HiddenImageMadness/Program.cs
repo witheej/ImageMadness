@@ -4,20 +4,26 @@ using System.IO;
 
 namespace HiddenImageMadness
 {
-  class Program
-  {
-    static void Main(string[] args)
+    class Program
     {
-      Image img = System.Drawing.Image.FromFile("Papio-hamadryas-head.jpg");
-      float aspectRatio = (float)img.Height / (float)img.Width;
-      Image thumbnail = img.GetThumbnailImage(256, (int)(256 * aspectRatio), null, IntPtr.Zero);
+        static void Main(string[] args)
+        {
+            string primaryImageFile = "Papio-hamadryas-head.jpg";
+            Console.WriteLine($"Loading {primaryImageFile} into memory...");
+            Image img = System.Drawing.Image.FromFile(primaryImageFile);
+            float aspectRatio = (float)img.Height / (float)img.Width;
+            Console.WriteLine("Calling GetThumbnailImage() on the image...");
+            // You would expect this method to give you a simple thumbnail of the image:
+            Image thumbnail = img.GetThumbnailImage(256, (int)(256 * aspectRatio), null, IntPtr.Zero);
 
-      string filepath = Path.GetTempFileName() + ".jpg";
-      Console.WriteLine($"Saving thumbnail to {filepath}");
-      thumbnail.Save(Path.GetTempFileName() + ".jpg");
+            // It turns out the thumbnail is a separate image stored in the metadata of the file
+            string filepath = Path.ChangeExtension(Path.GetTempFileName(), ".jpg");
+            Console.WriteLine($"Saving thumbnail to {filepath}");
+            Console.WriteLine("Take a look at it!");
+            thumbnail.Save(filepath);
 
-      Console.WriteLine("Press any key to exit...");
-      Console.ReadKey();
+            Console.WriteLine("Press any key to exit...");
+            Console.ReadKey();
+        }
     }
-  }
 }
